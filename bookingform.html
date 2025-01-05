@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Majestic Hotel - Booking Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Additional styles for the payment section */
+#bookingForm {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#bookingForm .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#bookingForm input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#bookingForm button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#bookingForm button:hover {
+  background-color: #0056b3;
+}
+
+/* payment section  */
+/* Additional styles for the form container */
+  /* Additional styles for the form container */
+  .form-container {
+      position: relative;
+      perspective: 1000px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    /* Additional styles for the booking form */
+    #bookingForm, #paymentForm {
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      opacity: 1;
+    }
+
+    /* Additional styles for the flip effect */
+.flip {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+ /* Additional styles for the flip effect */
+  .flip-container {
+    perspective: 1000px;
+    position: relative;
+  }
+
+  .flip-container.flip .flipper {
+    transform: rotateY(180deg);
+  }
+
+  .flip-container .flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+
+  .flip-container .front,
+  .flip-container .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .flip-container .front {
+    z-index: 2;
+  }
+
+  .flip-container .back {
+    transform: rotateY(180deg);
+  }
+
+
+    /* Hide the payment form initially */
+    #paymentForm {
+      display: none;
+      opacity: 0;
+    }
+
+    /* Additional styles for the payment section */
+    .payment-section {
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Book Your Stay at Majestic Hotel</h1>
+    <div class="form-container">
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="checkin">Check-In Date</label>
+          <input type="date" id="checkin" name="checkin" required>
+        </div>
+        <div class="form-group">
+          <label for="checkout">Check-Out Date</label>
+          <input type="date" id="checkout" name="checkout" required>
+        </div>
+        <div class="form-group">
+          <label for="guests">Number of Guests</label>
+          <input type="number" id="guests" name="guests" min="1" required>
+        </div>
+        <div class="form-group">
+          <button type="button" id="bookBtn">Book Now</button>
+        </div>
+      </form>
+
+      <!-- Payment Section -->
+      <form id="paymentForm" class="payment-section">
+        <h2>Payment Information</h2>
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" name="cardNumber" required>
+        </div>
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" name="cvv" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Pay Now</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    // JavaScript (script.js)
+  
+    const bookingForm = document.getElementById("bookingForm");
+const paymentForm = document.getElementById("paymentForm");
+const bookBtn = document.getElementById("bookBtn");
+
+bookBtn.addEventListener("click", function (event) {
+event.preventDefault();
+
+// Hide the booking form
+bookingForm.style.opacity = "0";
+bookingForm.style.pointerEvents = "none";
+
+// Show the payment form with animations
+setTimeout(function () {
+bookingForm.style.display = "none";
+paymentForm.style.display = "block";
+paymentForm.style.opacity = "1";
+paymentForm.style.pointerEvents = "auto";
+paymentForm.classList.add("flip"); // Add the flip class to the payment form to trigger flip animation
+}, 500); // 500ms is the duration of the flip animation
+});
+  </script>
+  
+</body>
+</html>y>
+</html>
+
